@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 const App = () => {
   return (
     <BrowserRouter>
+    <div className="flex flex-col min-h-screen">
       <Toaster position="top-right" />
       <Navbar />
       <Routes>
@@ -27,7 +28,7 @@ const App = () => {
           }
         />
       </Routes>
-      <Footer/>
+      </div>
     </BrowserRouter>
   );
 };

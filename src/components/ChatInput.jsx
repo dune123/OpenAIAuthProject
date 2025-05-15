@@ -18,7 +18,7 @@ const uploadToImgbb = async (base64Image) => {
   );
 
   const data = await response.json();
-  
+
   if (data.success) {
     return data.data.url; // Image URL from imgbb
   } else {
@@ -30,18 +30,18 @@ const uploadToImgbb = async (base64Image) => {
 const querySerpApi = async (imageUrl, textPrompt) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/reverse-image-search",
+      "https://backendforsearch.onrender.com/api/reverse-image-search",
       { imageUrl, textPrompt }
     );
 
     if (response.data.error) {
       throw new Error(response.data.error);
     }
-    
+
     const imageResponse = response.data.imageResponse;
 
     const textResponse = response.data.textResponse;
-    
+
     // Combine and return both sets of titles (optional)
     return { imageResponse, textResponse };
   } catch (error) {
@@ -84,7 +84,7 @@ const ChatInput = ({ onSend }) => {
 
           // Step 2: Send to backend
           const results = await querySerpApi(uploadedImageUrl, textPrompt);
-          
+
           // Step 3: Update state
           setImageResponse(results.imageResponse);
           setTextResponse(results.textResponse);
@@ -178,11 +178,15 @@ const ChatInput = ({ onSend }) => {
       {/* Image Results and Text Reponse */}
       {isProcessing ? (
         <ProductCardSkeleton />
+      ) : imageResponse.length === 0 && textResponse.length === 0 ? (
+        <div className="text-center text-gray-500 p-4">
+          Upload an image and enter a product description to search.
+        </div>
       ) : (
-          <ProductList
-            imageResponse={imageResponse}
-            textResponse={textResponse}
-          />
+        <ProductList
+          imageResponse={imageResponse}
+          textResponse={textResponse}
+        />
       )}
     </div>
   );

@@ -1,7 +1,9 @@
 import React from 'react';
+import Footer from '../components/Footer';
 
 const AboutUs = () => {
   return (
+    <>
     <div className="min-h-screen bg-white py-12 px-6 md:px-20 text-gray-800">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-6 text-red-600">About Us</h1>
@@ -37,6 +39,8 @@ const AboutUs = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import ImageSlider from '../components/Slider'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../utils/SupabaseClient'
+import Footer from '../components/Footer'
 
 const LandingPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(null); // null while checking
@@ -26,6 +27,7 @@ const LandingPage = () => {
   }, [isAuthenticated, navigate]);
 
   return (
+    <>
     <div className='w-screen'>
     <div className='w-screen flex flex-col items-center pt-20'>
         <div className='flex flex-col gap-8 items-center w-[70%]'>
@@ -39,6 +41,8 @@ const LandingPage = () => {
     </div>
     <ImageSlider/>
     </div>
+    <Footer/>
+    </>
   )
 }
 

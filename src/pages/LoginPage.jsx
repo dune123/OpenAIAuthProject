@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/SupabaseClient";
 import toast from "react-hot-toast";
+import Footer from "../components/Footer";
 
 const LoginPage = () => {
   const [loginForm, setLoginForm] = useState(true);
@@ -76,7 +77,8 @@ const LoginPage = () => {
 
 
   return (
-    <div className="w-screen h-[90vh] flex justify-center pt-20 bg-white pb-40">
+    <>
+    <div className="w-screen h-[90vh] flex flex-col items-center pt-20 bg-white pb-40">
       {/* login form */}
       {loginForm && (
         <div className="w-100 flex flex-col p-4 border-2 border-gray-300 rounded-md transition-all duration-300">
@@ -117,7 +119,7 @@ const LoginPage = () => {
             {loginError && <p className="text-red-500">{loginError}</p>}
 
             <p
-              className="text-gray-300 pl-20 cursor-pointer"
+              className="text-gray-300 pl-20 cursor-pointer hover:text-red-500"
               onClick={() => {
                 setLoginForm(false);
                 setRegisterForm(true);
@@ -168,7 +170,7 @@ const LoginPage = () => {
             </Button>
             {registerError&&<p className="text-red-500">{registerError}</p>}
             <p
-              className="text-gray-300 pl-20 cursor-pointer"
+              className="text-gray-300 pl-20 cursor-pointer hover:text-red-500"
               onClick={() => {
                 setLoginForm(true);
                 setRegisterForm(false);
@@ -180,7 +182,10 @@ const LoginPage = () => {
           </form>
         </div>
       )}
+      
     </div>
+    <Footer/>
+    </>
   );
 };
 
