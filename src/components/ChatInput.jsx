@@ -26,6 +26,26 @@ const uploadToImgbb = async (base64Image) => {
   }
 };
 
+//to filter the data for ecommerce
+
+const filterEcommerceLinks = (responses) => {
+  if (!Array.isArray(responses)) return [];
+
+  const allowedSites = ["ebay.com", "amazon.com", "flipkart.com"];
+
+  return responses.filter((item) => {
+    // If item is a string URL:
+    if (typeof item === "string") {
+      return allowedSites.some((site) => item.includes(site));
+    }
+    // If item is an object with a url property (adjust as needed):
+    if (item.url && typeof item.url === "string") {
+      return allowedSites.some((site) => item.url.includes(site));
+    }
+    return false;
+  });
+};
+
 // SerpApi integration
 const querySerpApi = async (imageUrl, textPrompt) => {
   try {
@@ -85,9 +105,12 @@ const ChatInput = ({ onSend }) => {
           // Step 2: Send to backend
           const results = await querySerpApi(uploadedImageUrl, textPrompt);
 
+          const filteredImageResponse = filterEcommerceLinks(results.imageResponse);
+          const filteredTextResponse = filterEcommerceLinks(results.textResponse);
+
           // Step 3: Update state
-          setImageResponse(results.imageResponse);
-          setTextResponse(results.textResponse);
+          setImageResponse(filteredImageResponse);
+          setTextResponse(filteredTextResponse);
           setTextPrompt("");
 
           // Reset form
