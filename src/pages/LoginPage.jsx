@@ -76,7 +76,7 @@ const LoginPage = () => {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-        redirectTo: "http://localhost:3000", // or http://localhost:3000/dashboard if needed
+        redirectTo: "https://open-ai-auth-project.vercel.app/", // or http://localhost:3000/dashboard if needed
       }
       });
       if (error) {

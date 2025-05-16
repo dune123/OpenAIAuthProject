@@ -105,12 +105,9 @@ const ChatInput = ({ onSend }) => {
           // Step 2: Send to backend
           const results = await querySerpApi(uploadedImageUrl, textPrompt);
 
-          const filteredImageResponse = filterEcommerceLinks(results.imageResponse);
-          const filteredTextResponse = filterEcommerceLinks(results.textResponse);
-
           // Step 3: Update state
-          setImageResponse(filteredImageResponse);
-          setTextResponse(filteredTextResponse);
+          setImageResponse(results.imageResponse);
+          setTextResponse(results.textResponse);
           setTextPrompt("");
 
           // Reset form
